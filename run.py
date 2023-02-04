@@ -12,8 +12,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('love_sandwiches')  
 
-sales = SHEET.worksheet('sales')
-data = sales.get_all_values()
+# sales = SHEET.worksheet('sales')
+# data = sales.get_all_values()
 
 
 def get_sales_data():
@@ -98,14 +98,28 @@ def get_last_5_entries_sales():
     entries for each sandwich and returns the data as a list of lists.
     """
     sales = SHEET.worksheet("sales")
-   
-
+    
     columns = []
     for ind in range(1, 7):
         column = sales.col_values(ind)
         columns.append(column[-5:])
+    
+    return columns  
 
-    return columns
+
+def calculate_stock_data(data):
+    """
+    Calculate the average stock for each item type, adding 10%
+    """
+    print("calculating stock data...\n")
+    new_stock_data = []
+    
+    for column in data:
+        int_column = [int(num) for num in column]
+        average = sum(int_column) / len(int_column)
+        stock_num = average * 1.1
+        new_stock_data.append(stock_num)
+    print(new_stock_data)
 
 
 def main():
