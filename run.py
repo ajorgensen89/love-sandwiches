@@ -103,7 +103,6 @@ def get_last_5_entries_sales():
         column = sales.col_values(ind)
         columns.append(column[-5:])
 
-    
     return columns  
 
 
