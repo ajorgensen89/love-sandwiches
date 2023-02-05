@@ -81,7 +81,6 @@ def calculate_surplus_data(sales_row):
     stock_row = stock[-1]
     print(f"Stock row: {stock_row}")
     print(f"Sales row: {sales_row}")
-    pprint(stock)
 
     surplus_data = []
     for stock, sales in zip(stock_row, sales_row):
@@ -103,7 +102,7 @@ def get_last_5_entries_sales():
     for ind in range(1, 7):
         column = sales.col_values(ind)
         columns.append(column[-5:])
-    pprint(columns)    
+
     
     return columns  
 
